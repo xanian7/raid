@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://5blw7tdvjmse"]
+[gd_scene load_steps=5 format=3 uid="uid://5blw7tdvjmse"]
 
 [ext_resource type="Script" uid="uid://cpv0oklwmyuw3" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://bmumjr423ts1a" path="res://Assets/Tilesets/Player-Sheet.png" id="2_6t5aa"]
-[ext_resource type="PackedScene" uid="uid://cr6kk0yjdvvy7" path="res://Scenes/sword.tscn" id="3_6t5aa"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vgqql"]
 animations = [{
@@ -30,9 +29,3 @@ sprite_frames = SubResource("SpriteFrames_vgqql")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_fkybt")
-
-[node name="Weapon" type="Node" parent="."]
-
-[node name="Sword" parent="." instance=ExtResource("3_6t5aa")]
-position = Vector2(8, 6)
-rotation = 6.84582

@@ -8,17 +8,20 @@ extends CharacterBody2D
 @export var current_health: float
 @export var defense: float
 
+@export var flipped: bool
+
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 func _ready():
-	add_to_group("player")
+	self.add_to_group("player")
 
 
 func _physics_process(delta):
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	move_player(delta)
+	
+func move_player(delta):
 	var direction = Vector2.ZERO
 	direction = Vector2(
 		(Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * 2,
@@ -28,8 +31,10 @@ func _physics_process(delta):
 		velocity.x = direction.x * SPEED
 		if direction.x > 0:
 			animated_sprite_2d.flip_h = false
+			flipped = true
 		else: 
 			animated_sprite_2d.flip_h = true
+			flipped = false
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 			
