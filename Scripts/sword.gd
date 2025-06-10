@@ -3,6 +3,7 @@ extends Node2D
 @onready var animation_player = $AnimationPlayer
 @onready var collision_shape_2d = $Sprite2D/Area2D/CollisionShape2D
 @onready var sprite_2d = $Sprite2D
+@onready var gpu_particles_2d = $GPUParticles2D
 
 @export var swing_angle: float = 90.0      # degrees
 @export var swing_speed: float = 500.0    # degrees per second
@@ -22,7 +23,10 @@ var start_position = null
 var offset = 0.0
 
 var swinging: bool = false
-@export var slash_effect_scene: PackedScene
+var is_throwing = false
+var throw_direction = Vector2.ZERO
+var throw_speed = 600
+var throw_target = Vector2.ZERO
 
 """
 Called when the node enters the scene tree for the first time.
@@ -38,12 +42,19 @@ Called every frame. 'delta' is the elapsed time since the previous frame.
 @param delta (float) delta time.  
 """
 func _physics_process(delta):
-	if swinging:
-		if global_position.distance_to(start_position) > 1.0:
-			swinging = false
+	if is_throwing:
+		var distance_to_target = global_position.distance_to(throw_target)
+		var move_distance = throw_speed * delta
+		if move_distance >= distance_to_target:
+			global_position = throw_target
+			is_throwing = false
+			gpu_particles_2d.emitting = false
+		else:
+			global_position += throw_direction * move_distance
 	else:
 		if player:
 			follow(delta)
+		gpu_particles_2d.emitting = false
 		collision_shape_2d.disabled = true
 		# Only aim at mouse if not swinging
 		var mouse_pos = get_global_mouse_position()
@@ -58,10 +69,15 @@ func swing():
 	var mouse_pos = get_global_mouse_position()
 	start_position = global_position
 	swinging = true
-	global_position = lerp(global_position, mouse_pos, attack_speed * 0.1) 
+	global_position = lerp(global_position, mouse_pos, attack_speed) 
 	collision_shape_2d.disabled = false
-	spawn_slash_effect()
 	
+func throw_sword():
+	gpu_particles_2d.emitting = true
+	throw_target = get_global_mouse_position()
+	throw_direction = (throw_target - global_position).normalized()
+	is_throwing = true
+	collision_shape_2d.disabled = false
 		
 func follow(delta):
 	if player.flipped:
@@ -73,16 +89,13 @@ func follow(delta):
 	
 
 func spawn_slash_effect():
-	if slash_effect_scene:
-		var effect = slash_effect_scene.instantiate()
-		add_child(effect)
-		effect.global_position = global_position
-		effect.rotation = rotation
+	if gpu_particles_2d:
+		gpu_particles_2d.emitting = true
 
 
 func _unhandled_input(event):
 	if event.is_action_pressed("attack"):
-		swing()
+		throw_sword()
 
 
 func _on_area_2d_body_entered(body):
