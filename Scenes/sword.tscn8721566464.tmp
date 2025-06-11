@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cr6kk0yjdvvy7"]
+[gd_scene load_steps=10 format=3 uid="uid://cr6kk0yjdvvy7"]
 
 [ext_resource type="Script" uid="uid://emsbfoo84n2p" path="res://Scripts/sword.gd" id="1_6wdhb"]
 [ext_resource type="Texture2D" uid="uid://dgsyeihhaxoci" path="res://Assets/Tilesets/Sword-Sheet.png" id="1_goa0h"]
-[ext_resource type="PackedScene" uid="uid://bosx2nxtbmp3y" path="res://Scenes/boomerang_attack_particles.tscn" id="2_6j4cb"]
-[ext_resource type="PackedScene" uid="uid://lqh2gsvgl3ur" path="res://Scenes/pierce_attack_particles.tscn" id="2_kb2vl"]
+[ext_resource type="PackedScene" uid="uid://lqh2gsvgl3ur" path="res://Scenes/sword_attack_effects.tscn" id="2_kb2vl"]
 [ext_resource type="Texture2D" uid="uid://bmumjr423ts1a" path="res://Assets/Tilesets/Player-Sheet.png" id="3_d6wag"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6wdhb"]
@@ -132,12 +131,8 @@ _data = {
 script = ExtResource("1_6wdhb")
 damage = 1.0
 
-[node name="BoomerangAttackParticles" parent="." instance=ExtResource("2_6j4cb")]
-emitting = false
-
-[node name="PierceAttackParticles" parent="." instance=ExtResource("2_kb2vl")]
+[node name="GPUParticles2D" parent="." instance=ExtResource("2_kb2vl")]
 position = Vector2(0, -16)
-emitting = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 1)

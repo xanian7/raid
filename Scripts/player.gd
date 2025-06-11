@@ -2,13 +2,15 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
-@export var attack: float
-@export var level: int
-@export var max_health: float
-@export var current_health: float
-@export var defense: float
 
-@export var flipped: bool
+@export var strength: float = 10.0
+@export var speed: float = 10.0
+@export var stamnina: float = 10.0
+@export var max_health: float = 10.0
+@export var current_health: float = max_health
+@export var level: int
+
+var flipped: bool
 
 
 const SPEED = 300.0

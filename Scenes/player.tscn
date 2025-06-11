@@ -18,11 +18,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
-attack = 10.0
-level = 1
-max_health = 10.0
 current_health = 10.0
-defense = 5.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vgqql")

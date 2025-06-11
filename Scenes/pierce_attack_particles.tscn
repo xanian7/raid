@@ -25,7 +25,7 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_r1u6u")
 color_ramp = SubResource("GradientTexture1D_r1u6u")
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="PierceAttackParticles" type="GPUParticles2D"]
 amount = 100
 lifetime = 2.09
 speed_scale = 40.34
