@@ -133,7 +133,7 @@ script = ExtResource("1_6wdhb")
 damage = 1.0
 
 [node name="BoomerangAttackParticles" parent="." instance=ExtResource("2_6j4cb")]
-emitting = false
+position = Vector2(0, -10)
 
 [node name="PierceAttackParticles" parent="." instance=ExtResource("2_kb2vl")]
 position = Vector2(0, -16)

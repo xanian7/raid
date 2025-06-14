@@ -13,7 +13,7 @@ particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(1, 10, 1)
 direction = Vector3(0, 1, 0)
-spread = 180.0
+spread = 0.0
 flatness = 0.978
 initial_velocity_max = 10.0
 angular_velocity_min = -720.0
@@ -25,6 +25,7 @@ scale_min = 0.0
 scale_curve = SubResource("CurveTexture_pntnq")
 
 [node name="BoomerangAttackParticles" type="GPUParticles2D"]
+emitting = false
 amount = 500
 lifetime = 0.6
 trail_lifetime = 0.01
