@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2lfbpwb7t6j6"]
+
+[ext_resource type="Script" uid="uid://bmellfq8umwsm" path="res://Scripts/camera.gd" id="1_375tr"]
+[ext_resource type="Shader" uid="uid://bhsero5itrfo6" path="res://pixelart_stylizer.gdshader" id="2_f1cf7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_375tr"]
+size = Vector2(10, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhsga"]
+render_priority = 0
+shader = ExtResource("2_f1cf7")
+shader_parameter/shadows_enabled = true
+shader_parameter/highlights_enabled = true
+shader_parameter/shadow_strength = 0.4
+shader_parameter/highlight_strength = 0.1
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+
+[node name="Camera" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+projection = 1
+size = 12.0
+near = 0.001
+script = ExtResource("1_375tr")
+
+[node name="PostProcess" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_375tr")
+surface_material_override/0 = SubResource("ShaderMaterial_mhsga")
